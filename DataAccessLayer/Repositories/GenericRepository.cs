@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
-        public void Add(T t)
+        public void Insert(T t)
         {
             using var cx = new Context();
             cx.Add(t);

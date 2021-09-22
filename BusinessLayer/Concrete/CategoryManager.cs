@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 
-
+//Ef bağımlılığını minimize ediyoruz ctor aracılığıyla veriyoruz
 namespace BusinessLayer.Concrete
 {
     public class CategoryManager : ICategoryServices
     {
-        readonly EfCategoryRepository efCategoryRepository;
-
-        public CategoryManager()
+        private readonly ICategoryDal _categoryDal;
+        public CategoryManager(ICategoryDal categoryDal)
         {
-            efCategoryRepository = new EfCategoryRepository();
+            _categoryDal = categoryDal;
         }
 
 
@@ -22,30 +22,29 @@ namespace BusinessLayer.Concrete
         {
             if (category.CategoryName != "" && category.CategoryDescription != "" && category.CategoryStatus == true)
             {
-                //categoryRepository.AddCategory(category);
-                efCategoryRepository.Add(category);
+                _categoryDal.Insert(category);
 
             }
         }
 
         public void CategoryDelete(Category category)
         {
-            efCategoryRepository.Delete(category);
+            _categoryDal.Delete(category);
         }
 
         public void CategoryUpdate(Category category)
         {
-            efCategoryRepository.Update(category);
+            _categoryDal.Update(category);
         }
 
         public List<Category> GetList()
         {
-            return efCategoryRepository.GetAllList();
+            return _categoryDal.GetAllList();
         }
 
         public Category GetById(int id)
         {
-            return efCategoryRepository.GetById(id);
+            return _categoryDal.GetById(id);
         }
     }
 }

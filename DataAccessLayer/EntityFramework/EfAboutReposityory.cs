@@ -13,3 +13,5 @@ namespace DataAccessLayer.EntityFramework
     {
     }
 }
+
+//Şuanki kullandığımız teknolojiyi(Ef) mevcut yapı içerisindeki bağımlılıkları minimize etmek için bu yapıyı uyguladık.
