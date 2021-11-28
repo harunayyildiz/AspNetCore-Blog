@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +25,29 @@ namespace CoreDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession(); //Oturum için.
+
+
+            //Proje seviyesinde Authorize
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            //login return url
+            services.AddMvc();
+            services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x =>
+                    {
+                         x.LoginPath = "/Login/Index/";
+                    }
+                );
+            //-login return url
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,8 +62,8 @@ namespace CoreDemo
             }
 
             app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");
-            app.UseStatusCodePages();
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
@@ -47,8 +73,8 @@ namespace CoreDemo
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            });            
-      
+            });
+
         }
 
     }

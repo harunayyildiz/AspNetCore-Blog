@@ -21,7 +21,11 @@ namespace BusinessLayer.Concrete
 
         public void BlogAdd(Blog blog)
         {
-            _blogDal.Insert(blog);
+            if (blog.BlogTitle.Length > 45)
+            {
+                _blogDal.Insert(blog);
+            }
+
         }
 
         public void BlogDelete(Blog blog)
@@ -31,7 +35,11 @@ namespace BusinessLayer.Concrete
 
         public void BlogUpdate(Blog blog)
         {
-            _blogDal.Update(blog);
+            if (blog.BlogTitle.Length > 45)
+            {
+                _blogDal.Update(blog);
+            }
+
         }
 
         public List<Blog> GetList()
@@ -57,7 +65,12 @@ namespace BusinessLayer.Concrete
 
         public List<Blog> GetBlogListByWriter(int id)
         {
-            return _blogDal.GetAllList(x => x.WriterId == id).Take(3).ToList(); //writerId göre Blogları listele 3 adet getir
+            return _blogDal.GetAllList(x => x.WriterId == id).TakeLast(3).ToList(); //writerId göre Blogları listele son 3 adet getir
+        }
+
+        public List<Blog> GetLast2Blog()
+        {
+            return _blogDal.GetAllList().TakeLast(2).ToList();
         }
     }
 }

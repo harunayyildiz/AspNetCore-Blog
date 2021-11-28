@@ -11,7 +11,7 @@ namespace BusinessLayer.Concrete
 {
     public class NewsLetterManager : INewsLetterServices
     {
-        INewsLetterDal _newsLetterDal;
+        readonly INewsLetterDal _newsLetterDal;
 
         public NewsLetterManager(INewsLetterDal newsLetterDal)
         {
