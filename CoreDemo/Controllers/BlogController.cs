@@ -13,8 +13,18 @@ namespace CoreDemo.Controllers
         private readonly BlogManager _blogManager = new BlogManager(new EfBlogRepository());
         public IActionResult Index()
         {
-            var results = _blogManager.GetList();
+            var results = _blogManager.GetBlogListWithCategory();
+            //içindeki sınıfları da getir-> include ile
+            //Eager loading amacıyla..
             return View(results);
+        }
+
+        public IActionResult BlogReadAll(int id)
+        {
+            //Comments de de kullanmak için..
+            ViewBag.i=id;
+            var result = _blogManager.GetBlogById(id);
+            return View(result);
         }
     }
 }

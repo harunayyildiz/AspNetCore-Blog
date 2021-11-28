@@ -19,6 +19,8 @@ namespace EntityLayer.Concrete
         public bool BlogStatus { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public int WriterId { get; set; }
+        public Writer Writer { get; set; } //Blogun yazarı için...
 
         //İlişki içine alıcanak tablu türü(Entity) olması gerek.
         public List<Comment> Comments { get; set; }

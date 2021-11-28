@@ -12,7 +12,7 @@ namespace EntityLayer.Concrete
         [Key]
         public int CommentId { get; set; }
         public string CommentUserName { get; set; }
-        public string CommentTitle { get; set; }
+        public string CommentEmail { get; set; }
         public string CommentContent { get; set; }
         public DateTime CommentCreatedAt { get; set; }
         public bool CommentStatus { get; set; }

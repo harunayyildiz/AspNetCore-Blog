@@ -37,6 +37,6 @@ namespace CoreDemo.Controllers
         public IActionResult Test()
         {
             return View();
-        }
+        } 
     }
 }
