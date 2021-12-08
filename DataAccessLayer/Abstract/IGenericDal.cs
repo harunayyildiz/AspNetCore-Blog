@@ -14,7 +14,7 @@ namespace DataAccessLayer.Abstract
         void Update(T t);
         List<T> GetAllList(); //Aynı isim farklı parametreler
         List<T> GetAllList(Expression<Func<T, bool>> filter); //Expression [Şartlı sorgulama]
-        T GetById(int id);
+        T TGetById(int id);
 
     }
 }

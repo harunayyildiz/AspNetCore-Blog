@@ -16,6 +16,7 @@ namespace DataAccessLayer.Abstract
         //Bağlı bulunduğu ef folder implement no forget!..
 
         List<Blog> GetListWithCategory();
+        List<Blog> GetListWithCategoryByWriter(int writerId); //Yazarın blog listesini ve categorisini getirir.
 
     }
 }
