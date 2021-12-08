@@ -7,16 +7,12 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IBlogServices
+    public interface IBlogServices : IGenericService<Blog>
     {
 
-        void BlogAdd(Blog blog);
-        void BlogDelete(Blog blog);
-        void BlogUpdate(Blog blog);
-        List<Blog> GetList();
-        Blog GetById(int id);
         List<Blog> GetBlogListWithCategory(); //specifics methods added [DataAccessLayer->EfBlogRepository]
         List<Blog> GetBlogById(int id); //blog readall
         List<Blog> GetBlogListByWriter(int id); //Yazarların Blogları
+        List<Blog> GetListWithCategoryByWriterBm(int writerId); //Yazarın blog listesini ve categorisini getirir.
     }
 }

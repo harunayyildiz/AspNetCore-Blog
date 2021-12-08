@@ -7,15 +7,8 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ICommentService
+    public interface ICommentService : IGenericService<Comment>
     {
-        void CommentAdd(Comment commend);
-        // void CommentDelete(Comment commend);
-        // void CommentUpdate(Comment commend);
-        List<Comment> GetList(int id);
-        //Comment GetById(int id);
-
-        //Generic Hale Getirilecek
-
+        List<Comment> GetList(int id); //Blogdaki yorumlar için.
     }
 }

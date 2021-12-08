@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IWriterServices
+    public interface IWriterServices:IGenericService<Writer>
     {
-        void WriterAdd(Writer write); //Kayıt ol sayfası..
     }
 }
