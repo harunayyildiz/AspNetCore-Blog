@@ -29,7 +29,7 @@ namespace CoreDemo.Controllers
             inputModel.CommentStatus = true;
             inputModel.CommentCreatedAt = DateTime.Now;
             inputModel.BlogId = 5;
-            _commentManager.CommentAdd(inputModel);
+            _commentManager.TAdd(inputModel);
             return RedirectToAction("BlogReadAll", "Blog", new { id = inputModel.BlogId });
             //Razor View->Partial
         }

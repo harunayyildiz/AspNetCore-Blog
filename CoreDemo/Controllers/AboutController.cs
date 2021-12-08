@@ -6,11 +6,11 @@ namespace CoreDemo.Controllers
 {
     public class AboutController : Controller
     {
-        readonly AboutManager aboutManager = new(new EfAboutReposityory());
+        readonly AboutManager _aboutManager = new(new EfAboutReposityory());
         public IActionResult Index()
         {
 
-            var result = aboutManager.GetList();
+            var result = _aboutManager.GetList();
             return View(result);
         }
         public PartialViewResult SocialMediaAbout()

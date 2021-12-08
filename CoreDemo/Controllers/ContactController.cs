@@ -19,7 +19,7 @@ namespace CoreDemo.Controllers
         {
             inputModel.ContactCreatedAt = DateTime.Now;
             inputModel.ContactStatus = true;
-            _contactManager.ContactAdd(inputModel);
+            _contactManager.TAdd(inputModel);
             return RedirectToAction("Index","Blog");
         }
     }

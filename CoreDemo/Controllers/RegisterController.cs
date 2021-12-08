@@ -30,7 +30,7 @@ namespace CoreDemo.Controllers
             {
                 inputModel.WriterStatus = true;
                 inputModel.WriteAbout = "test";
-                _writerManager.WriterAdd(inputModel);
+                _writerManager.TAdd(inputModel);
                 return RedirectToAction("Index", "Blog");
             }
             else
