@@ -44,7 +44,7 @@ namespace DataAccessLayer.Repositories
             return cx.Set<T>().Where(filter).ToList();
         }
 
-        public T GetById(int id)
+        public T TGetById(int id)
         {
             using var cx = new Context();
             return cx.Set<T>().Find(id);

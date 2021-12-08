@@ -11,16 +11,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.EntityFramework
 {
-   public class EfBlogRepository:GenericRepository<Blog>,IBlogDal
+    public class EfBlogRepository : GenericRepository<Blog>, IBlogDal
     {
-
         List<Blog> IBlogDal.GetListWithCategory()
         {
-            using (var c=new Context())
+            using (var c = new Context())
             {
                 return c.Blogs.Include(x => x.Category).ToList();
                 //Hangi entity include edilcek...
             }
         }
+        public List<Blog> GetListWithCategoryByWriter(int writerId)
+        {
+            using (var c = new Context())
+            {
+                return c.Blogs.Include(x => x.Category).Where(x => x.WriterId == writerId).ToList();
+                //Hangi entity include edilcek...
+            }
+        }
+
     }
 }
