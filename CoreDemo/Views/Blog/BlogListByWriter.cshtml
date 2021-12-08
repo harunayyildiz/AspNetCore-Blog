@@ -1,0 +1,71 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+
+<h1>Yazarın Blogları</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Blog Başlığı</th>
+        <th>Oluşturma Tarihi</th>
+        <th>Categori</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.BlogId</th>
+            <td>@item.BlogTitle</td>
+            <td>@(((DateTime)item.BlogCreatedAt).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.Category.CategoryName</td>
+            <td>
+                @if (item.BlogStatus)
+                {
+                    <span class="badge badge-success">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">Pasif</span>
+                }
+            </td>
+            <td>@Html.ActionLink("Sil", "DeletedBlog", new { id = item.BlogId }, new { @class = "btn btn-outline-danger", onclick = "return confirm('Silmek İstediğinize Eminmisiniz?')" })</td>
+            <td><a href="/Blog/EditBlog/@item.BlogId" class="btn btn-warning"> Düzenle </a></td>
+        </tr>
+
+    }
+</table>
+
+<a href="/Blog/BlogAdd/" class="btn btn-info">Yeni Blog Oluştur</a>
+
+@*Yazar için...*@
+
+@*<script type="text/javascript">
+    function deleted_proses()
+    {
+      swal({
+      title: "Silmek istediğinize emin misiniz?",
+      text: "Bir kez silindiğinde bu dosyayı kurtaramayacaksınız!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Blog Başarıyla Silindi!", {
+          icon: "success",
+        });
+                window.location.href = "BlogController/DeletedBlog/1";
+      } else {
+        swal("Silmekten vazgeçtiniz");
+
+      }
+    });
+    }
+</script>*@
