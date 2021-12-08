@@ -18,23 +18,23 @@ namespace BusinessLayer.Concrete
         }
 
 
-        public void CategoryAdd(Category category)
+        public void TAdd(Category t)
         {
-            if (category.CategoryName != "" && category.CategoryDescription != "" && category.CategoryStatus == true)
+            if (t.CategoryName != "" && t.CategoryDescription != "" && t.CategoryStatus == true)
             {
-                _categoryDal.Insert(category);
+                _categoryDal.Insert(t);
 
             }
         }
 
-        public void CategoryDelete(Category category)
+        public void TDelete(Category t)
         {
-            _categoryDal.Delete(category);
+            _categoryDal.Delete(t);
         }
 
-        public void CategoryUpdate(Category category)
+        public void TUpdate(Category t)
         {
-            _categoryDal.Update(category);
+            _categoryDal.Update(t);
         }
 
         public List<Category> GetList()
@@ -44,7 +44,7 @@ namespace BusinessLayer.Concrete
 
         public Category GetById(int id)
         {
-            return _categoryDal.GetById(id);
+            return _categoryDal.TGetById(id);
         }
     }
 }

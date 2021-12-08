@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +18,9 @@ namespace BusinessLayer.Concrete
             _commentDal = commentDal;
         }
 
-        public void CommentAdd(Comment commend)
+        public void TAdd(Comment t)
         {
-            _commentDal.Insert(commend);
+            _commentDal.Insert(t);
         }
 
 
@@ -28,6 +28,26 @@ namespace BusinessLayer.Concrete
         {
             return _commentDal.GetAllList(x => x.BlogId == id);
 
+        }
+
+        public void TDelete(Comment t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Comment t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Comment> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Comment GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

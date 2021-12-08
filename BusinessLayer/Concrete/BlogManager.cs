@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.Abstract;
+using BusinessLayer.Helper;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 
@@ -19,25 +20,25 @@ namespace BusinessLayer.Concrete
             _blogDal = blogDal;
         }
 
-        public void BlogAdd(Blog blog)
+        public void TAdd(Blog t)
         {
-            if (blog.BlogTitle.Length > 45)
+            if (t.BlogTitle.Length > 45)
             {
-                _blogDal.Insert(blog);
+                _blogDal.Insert(t);
             }
 
         }
 
-        public void BlogDelete(Blog blog)
+        public void TDelete(Blog t)
         {
-            _blogDal.Delete(blog);
+            _blogDal.Delete(t);
         }
 
-        public void BlogUpdate(Blog blog)
+        public void TUpdate(Blog t)
         {
-            if (blog.BlogTitle.Length > 45)
+            if (t.BlogTitle.Length > 45)
             {
-                _blogDal.Update(blog);
+                _blogDal.Update(t);
             }
 
         }
@@ -49,17 +50,23 @@ namespace BusinessLayer.Concrete
 
         public Blog GetById(int id)
         {
-            return _blogDal.GetById(id);
+            return _blogDal.TGetById(id);
         }
 
         public List<Blog> GetBlogListWithCategory()
         {
-            return _blogDal.GetListWithCategory();
+            return _blogDal.GetListWithCategory().OrderByDescending(x => x.BlogCreatedAt).ToList();   //Son Bloglardan getirmeye başlar
+                                                                                                      ////Blog kısmında index
+                                                                                                      ///Yazar kısmında dashboard kullanır
+        }
+        public List<Blog> GetListWithCategoryByWriterBm(int writerId)
+        {
+            return _blogDal.GetListWithCategoryByWriter(writerId);
         }
 
         public List<Blog> GetBlogById(int id)
         {
-            //ID göre Blog getir
+            //ID göre Blog Listesi getir
             return _blogDal.GetAllList(x => x.BlogId == id);
         }
 
