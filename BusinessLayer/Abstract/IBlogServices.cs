@@ -12,7 +12,7 @@ namespace BusinessLayer.Abstract
 
         List<Blog> GetBlogListWithCategory(); //specifics methods added [DataAccessLayer->EfBlogRepository]
         List<Blog> GetBlogById(int id); //blog readall
-        List<Blog> GetBlogListByWriter(int id); //Yazarların Blogları
+        List<Blog> GetBlogListByWriter(int id, bool? isTake); //Yazarların Blogları
         List<Blog> GetListWithCategoryByWriterBm(int writerId); //Yazarın blog listesini ve categorisini getirir.
     }
 }
