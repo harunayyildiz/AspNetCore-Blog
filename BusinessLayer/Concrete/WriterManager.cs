@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,16 +31,27 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Writer t)
         {
-            throw new NotImplementedException();
+            _writerDal.Update(t);
         }
         public Writer GetById(int id)
         {
-            throw new NotImplementedException();
+            return _writerDal.TGetById(id);
         }
 
         public List<Writer> GetList()
         {
             throw new NotImplementedException();
+        }
+
+        public List<Writer> GetWriterById(int id)
+        {
+            //Dashboardda Yazarın bilgisini görüntülemek için...
+            return _writerDal.GetAllList(x => x.WriterId == id);
+        }
+
+        public Writer TGetByFilter(Expression<Func<Writer, bool>> filter)
+        {
+           return _writerDal.GetByFilter(filter);
         }
     }
 }

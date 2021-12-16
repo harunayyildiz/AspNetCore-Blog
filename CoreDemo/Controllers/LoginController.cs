@@ -37,7 +37,7 @@ namespace CoreDemo.Controllers
                 //"x": Startupda belirledigimiz authenticationsheme alması gerekiyor yani cookie yetkilendirmesini yapmamizi sağlıyor
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal); //Şifreli formatta Cookie oluşturması için
-                return RedirectToAction("Index", "Writer");
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {

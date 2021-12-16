@@ -13,11 +13,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoreDemo.Controllers
 {
-    [AllowAnonymous]
     public class BlogController : Controller
     {
         private readonly BlogManager _blogManager = new BlogManager(new EfBlogRepository());
         private readonly CategoryManager cm = new CategoryManager(new EfCategoryRepository());
+        private readonly WriterManager writerManager = new WriterManager(new EfWriterRepository());
         public IActionResult Index()
         {
             var results = _blogManager.GetBlogListWithCategory();
@@ -36,7 +36,8 @@ namespace CoreDemo.Controllers
         //Yazarlarla İlişkili.
         public IActionResult BlogListByWriter()
         {
-            var result = _blogManager.GetListWithCategoryByWriterBm(1);
+            var writer = writerManager.TGetByFilter(x=>x.WriterMail==User.Identity.Name);
+            var result = _blogManager.GetListWithCategoryByWriterBm(writer.WriterId);
             return View(result);
         }
         [HttpGet]
@@ -53,9 +54,11 @@ namespace CoreDemo.Controllers
             ValidationResult result = blogValid.Validate(inputModel);
             if (result.IsValid)
             {
+                var writer = writerManager.TGetByFilter(x => x.WriterMail == User.Identity.Name);
+
                 inputModel.BlogStatus = true;
                 inputModel.BlogCreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString());
-                inputModel.WriterId = 1; //sessiondan çekilecek.....
+                inputModel.WriterId = writer.WriterId;
                 _blogManager.TAdd(inputModel);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -63,7 +66,6 @@ namespace CoreDemo.Controllers
             {
                 foreach (var item in result.Errors)
                 {
-
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                     //Modele hatayı veren properies adı ve  hatası
                 }

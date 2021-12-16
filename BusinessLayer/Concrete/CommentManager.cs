@@ -42,7 +42,7 @@ namespace BusinessLayer.Concrete
 
         public List<Comment> GetList()
         {
-            throw new NotImplementedException();
+            return _commentDal.GetAllList();
         }
 
         public Comment GetById(int id)

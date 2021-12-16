@@ -57,7 +57,7 @@ namespace BusinessLayer.Concrete
         {
             return _blogDal.GetListWithCategory().OrderByDescending(x => x.BlogCreatedAt).ToList();   //Son Bloglardan getirmeye başlar
                                                                                                       ////Blog kısmında index
-                                                                                                      ///Yazar kısmında dashboard kullanır
+            ///Yazar kısmında dashboard kullanır
         }
         public List<Blog> GetListWithCategoryByWriterBm(int writerId)
         {
@@ -70,9 +70,17 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetAllList(x => x.BlogId == id);
         }
 
-        public List<Blog> GetBlogListByWriter(int id)
+        public List<Blog> GetBlogListByWriter(int id, bool? isTake)
         {
-            return _blogDal.GetAllList(x => x.WriterId == id).TakeLast(3).ToList(); //writerId göre Blogları listele son 3 adet getir
+            if (isTake.HasValue && isTake == true)
+            {
+                return _blogDal.GetAllList(x => x.WriterId == id).TakeLast(3).ToList(); //writerId göre Blogları listele son 3 adet getir
+            }
+            else
+            {
+                return _blogDal.GetAllList(x => x.WriterId == id);
+            }
+
         }
 
         public List<Blog> GetLast2Blog()

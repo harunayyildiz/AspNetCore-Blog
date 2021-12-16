@@ -49,5 +49,6 @@ namespace DataAccessLayer.Repositories
             using var cx = new Context();
             return cx.Set<T>().Find(id);
         }
+
     }
 }
