@@ -37,6 +37,7 @@
  <h4>  :clipboard:Video 70: Dashboard Controllerdaki LINQ Sorguları SOLID'i ezmeden mimariye taşındı. :heavy_check_mark:</h4>
  <h4>  :clipboard: Video 72: Yazar Profil Sayfasında yazar bilgileri güncellenmeden önce parola 2 kez girilip doğrulandı. :heavy_check_mark:</h4>
  <h4>  :clipboard: Video 76: Yazar'ın Bildirimler kısmında bütün bildirimler gözükmesin sadece durumu aktif olanlar gözüküyor. :heavy_check_mark:</h4>
+ <h4>  :clipboard: Video 94: Diyaloglar sweet alerte çekildi :heavy_check_mark:</h4>
  <br>
  <h4>  :clipboard: Video 79: Notificationların ne kadar süre önce gönderildiği yazdırılacak..</h4>
 </details>
