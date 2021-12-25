@@ -53,6 +53,8 @@
 * Microsoft.EntityFrameworkCore.SqlServer
 * FluentValidation
 * FluentValidation.AspNetCore
+* X.PagedList
+* X.PagedList.MVC.Core
  
  </details>
 
