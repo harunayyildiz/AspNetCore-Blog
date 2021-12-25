@@ -44,7 +44,7 @@ namespace CoreDemo
                 CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(x =>
                     {
-                         x.LoginPath = "/Login/Index/";
+                        x.LoginPath = "/Login/Index/";
                     }
                 );
             //-login return url
@@ -70,9 +70,17 @@ namespace CoreDemo
 
             app.UseEndpoints(endpoints =>
             {
+                //Area configurasyon
+                endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+              );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
             });
 
         }

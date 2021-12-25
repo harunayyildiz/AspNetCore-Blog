@@ -1,0 +1,65 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Kategori Adı</th>
+        <th>Pasif Yap</th>
+        <th>Aktif Yap</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> @item.CategoryId</td>
+            <td>@item.CategoryName</td>
+            <td>
+               @* <a href="/Admin/Category/PassiveCategory/@item.CategoryId/" id="PassiveCategory"*@
+               @* onclick="return confirm('Pasif yapmak istediğinize emin misiniz?')" class="btn btn-danger"> Pasif Yap</a>*@
+                <button id="PassiveCategory"
+               onclick="return passive_category(@item.CategoryId);" class="btn btn-danger"> Pasif Yap</button>
+            </td>
+            <td><a href="#" class="btn btn-info"> Aktif Yap</a></td>
+            <td><a href="#" class="btn btn-success"> Düzenle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Admin/Category/AddCategory/" class="btn btn-success"> Yeni Kategori</a>
+<br />
+<br />
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new {page}))
+@*page ifadesi CategoryController tarafındaki kullandığımız yapı, Url.Action ifadesi içerisinde gideceği sayfaların url belirttik*@
+
+
+
+<script type="text/javascript">
+    function passive_category(CategoryId)
+    {
+      swal({
+      title: "Pasif yapmak istediğinize emin misiniz?",
+      text: "Kategoriyi pasif hale getireceksiniz!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Pasif hale getirildi!", {
+          icon: "success",
+        });
+                window.location.href = "/Admin/Category/PassiveCategory/"+CategoryId+"/";
+      } else {
+        swal("Vazgeçtiniz");
+
+      }
+    });
+    }
+</script>
